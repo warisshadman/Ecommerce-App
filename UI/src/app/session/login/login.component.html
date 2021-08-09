@@ -1,0 +1,34 @@
+<div class="login-container">
+  <div class="text-center">
+    <h1>Sign In</h1>
+    <span class="font-size-14">Use your {{companyName}} Account</span>
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="margin-top-30">
+      <mat-form-field class="full-width font-size-14" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input formControlName="email" matInput>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="full-width font-size-14" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input formControlName="password" matInput>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="register-container">
+          <a class="register-link" routerLink="/registration">Register Here</a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="text-center">
+          <button type="submit" mat-flat-button class="font-size-14 full-width success-button">Sign In</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+</div>

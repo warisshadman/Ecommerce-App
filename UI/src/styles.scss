@@ -1,0 +1,225 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/ag-grid-community/dist/styles/ag-grid.css";
+@import "../node_modules/ag-grid-community/dist/styles/ag-theme-material.css";
+
+$base-size: 14px;
+$subtitle-size: 18px;
+$base-top-spacer: 15px;
+$base-top-large-spacer: 30px;
+$full-width: 100%;
+$primary-color: #142270;
+$secondary-color: #2144c0;
+$light-color: #40b5f0;
+$dark-color: #030303;
+$success-color: #142270;
+$neutral-color: #e1ecf0;
+$danger-color: #e10032;
+$white-color: #ffffff;
+$border-color: #dadce0;
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: $base-size;
+}
+
+.margin-top-15 {
+  margin-top: $base-top-spacer;
+}
+
+.margin-top-30 {
+  margin-top: $base-top-large-spacer;
+}
+
+.full-width {
+  width: $full-width;
+}
+
+.login-container {
+  width: 450px;
+  height: 450px;
+  padding: 45px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border: 1px solid $border-color;
+  border-radius: 10px;
+}
+
+.font-size-14 {
+  font-size: $base-size;
+}
+
+.success-button {
+  background-color: $secondary-color;
+  color: $white-color;
+}
+
+.add-button {
+  background-color: #ededed;
+  color: $dark-color;
+}
+
+.success-button:hover {
+  background-color: $success-color;
+  color: $white-color;
+}
+
+.subtitle {
+  font-size: $subtitle-size;
+}
+
+.main-container {
+  background-color: $neutral-color;
+  height: 100%;
+  width: 100%;
+  padding: 2.5rem;
+}
+
+.container-box {
+  background-color: $white-color;
+  padding: 2rem;
+  border-radius: 10px;
+  height: 100%;
+}
+
+.box-heading {
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  margin-bottom: 0px !important;
+  padding: 6px 0px;
+}
+
+.box-top-button {
+  float: right;
+  letter-spacing: 1px;
+}
+
+.font-bold {
+  font-weight: 700 !important;
+}
+
+.font-neutral {
+  color: dimgray;
+}
+
+.register-container {
+  padding: 8px 0px;
+}
+
+.register-link {
+  color: #2144c0;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none !important;
+}
+
+.custom-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dashboard-sidenav {
+  flex: 0 0 4%;
+  max-width: 4%;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.dashboard-content {
+  flex: 0 0 96%;
+  max-width: 96%;
+  width: 100%;
+  position: relative;
+}
+
+.dashboard-logo-container {
+  height: 70px;
+  width: 100%;
+  background-color: $secondary-color;
+}
+
+.dashboard-header-container {
+  height: 70px;
+  width: 100%;
+}
+
+.dashboard-sidebar-menu {
+  height: calc(100% - 70px);
+  background-color: $primary-color;
+}
+
+.menu-button {
+  width: 45px;
+  height: 45px;
+  padding: 10px;
+}
+
+.sub-menu {
+  cursor: pointer;
+}
+
+.menu-button:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+.menu-button-container {
+  padding: 15px;
+}
+
+.dashboard-wrapper {
+  padding: 15px;
+}
+
+.header-button-top-margin {
+  margin-top: 4px;
+}
+
+.remove-margin-bottom {
+  margin-bottom: 0px !important;
+}
+
+.inner-header-heading {
+  padding: 7px 0px;
+}
+
+.container-background {
+  background: $neutral-color;
+  padding: 15px;
+  height: calc(100vh - 70px);
+}
+
+.font-weight-700 {
+  font-weight: 700;
+}
+
+.dashboard-row.ant-row {
+  flex-flow: inherit !important;
+}
+
+// @media screen and (min-width: 1500px) {
+//   .dashboard-sidenav {
+//     flex: 0 0 3.5%;
+//     max-width: 3.5%;
+//     width: 100%;
+//     position: relative;
+//   }
+
+//   .dashboard-content {
+//     flex: 0 0 96.5%;
+//     max-width: 96.5%;
+//     width: 100%;
+//     position: relative;
+//   }
+// }

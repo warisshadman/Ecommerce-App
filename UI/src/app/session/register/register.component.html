@@ -1,0 +1,119 @@
+<div class="main-container">
+  <div class="container-box">
+    <form [formGroup]="registerForm" (ngSubmit)="confirmRegistration()">
+      <div class="row">
+        <div class="col-md-6">
+          <h1 class="box-heading">User Registeration</h1>
+        </div>
+        <div class="col-md-6">
+          <button mat-flat-button type="submit" class="box-top-button success-button">Confirm
+            Registeration</button>
+        </div>
+      </div>
+
+      <div class="row margin-top-30">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-6">
+
+          <div class="row">
+            <div class="col-md-12">
+              <h1 class="box-heading font-bold">Enter your details</h1>
+              <p class="font-neutral">We will use this information to provide access to right modules.</p>
+            </div>
+          </div>
+          <div class="row margin-top-30">
+            <div class="col-md-6">
+              <mat-form-field class="full-width font-size-14 " appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input formControlName="firstname" matInput>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="full-width font-size-14 " appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input formControlName="lastname" matInput>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="full-width font-size-14 " appearance="outline">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="full-width font-size-14 " appearance="outline">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="full-width font-size-14 " appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="full-width font-size-14 " appearance="outline">
+                <mat-label>Designation</mat-label>
+                <input formControlName="designation" matInput>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="full-width font-size-14 " appearance="outline">
+                <mat-label>Organisation</mat-label>
+                <mat-select formControlName="organisation">
+                  <mat-option *ngFor="let organisation of registeredOrganisation" [value]=organisation.name>
+                    {{organisation.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="full-width font-size-14 " appearance="outline">
+                <mat-label>Role</mat-label>
+                <mat-select formControlName="role">
+                  <mat-option *ngFor="let type of roleType" [value]="type.role">{{type.role | titlecase}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="full-width font-size-14 " appearance="outline">
+                <mat-label>Contact No.</mat-label>
+                <input formControlName="contact" matInput>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="full-width font-size-14 " appearance="outline">
+                <mat-label>Choose Identity Proof</mat-label>
+                <mat-select formControlName="idProof">
+                  <mat-option *ngFor="let proof of identityProof" [value]="proof.name">{{proof.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="full-width font-size-14 " appearance="outline">
+                <mat-label>Identity Card No.</mat-label>
+                <input formControlName="idCardNo" matInput>
+              </mat-form-field>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

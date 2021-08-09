@@ -1,0 +1,106 @@
+<div style="background-color: #fff; padding: 0px 15px 15px 15px">
+  <nz-table #headerTable [nzData]="bookRecords" [nzPageSize]="50">
+    <thead>
+      <tr>
+
+        <th nzWidth="100px">Acc. no.</th>
+        <th nzWidth="150px">ISBN no.</th>
+        <th>Book Name</th>
+        <th>Author</th>
+        <th>Publisher</th>
+        <th nzWidth="150px">Year</th>
+        <th nzWidth="150px">Status</th>
+        <th nzWidth="200px">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let data of headerTable.data">
+        <tr>
+
+          <td>{{ data.accession_no }}</td>
+          <td>{{ data.isbn }}</td>
+          <td>
+            <nz-avatar style="margin-right: 10px;" [nzShape]="'square'" nzSrc="" [nzSize]="'small'">
+            </nz-avatar>
+            {{ data.book_title }}
+          </td>
+          <td>{{ data.author_name }}</td>
+          <td>{{ data.publisher }}</td>
+          <td>{{ data.year_publication }}</td>
+          <td>{{ data.status }}</td>
+          <td>
+            <button nz-button nzType="default" (click)="showModal()">
+              <i nz-icon nzType="eye" nzTheme="outline"></i>
+            </button>
+            <button nz-button nzType="default">
+              <i nz-icon nzType="edit" nzTheme="outline"></i>
+            </button>
+            <button nz-button nzType="default" (click)="showConfirm(data.book_id)">
+              <i nz-icon nzType="delete" nzTheme="outline"></i>
+            </button>
+          </td>
+        </tr>
+        <nz-modal [(nzVisible)]="isVisible" nzTitle="{{data.book_title}}" (nzOnCancel)="handleCancel()"
+          (nzOnOk)="handleOk()">
+          <div nz-row>
+            <div nz-col nzSpan="10">
+              <p class="font-weight-700">DCC Call no.</p>
+            </div>
+            <div nz-col nzSpan="14">
+              <p>{{data.call_no}}</p>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col nzSpan="10">
+              <p class="font-weight-700">Format Type</p>
+            </div>
+            <div nz-col nzSpan="14">
+              <p>{{data.format_type}}</p>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col nzSpan="10">
+              <p class="font-weight-700">Total Pages</p>
+            </div>
+            <div nz-col nzSpan="14">
+              <p>{{data.total_pages}}</p>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col nzSpan="10">
+              <p class="font-weight-700">Language</p>
+            </div>
+            <div nz-col nzSpan="14">
+              <p>{{data.language}}</p>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col nzSpan="10">
+              <p class="font-weight-700">Price</p>
+            </div>
+            <div nz-col nzSpan="14">
+              <p>{{data.price}}</p>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col nzSpan="10">
+              <p class="font-weight-700">Quantity</p>
+            </div>
+            <div nz-col nzSpan="14">
+              <p>{{data.quantity}}</p>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col nzSpan="10">
+              <p class="font-weight-700">Added On</p>
+            </div>
+            <div nz-col nzSpan="14">
+              <p>{{data.created_on | date}}</p>
+            </div>
+          </div>
+        </nz-modal>
+      </ng-container>
+
+    </tbody>
+  </nz-table>
+</div>

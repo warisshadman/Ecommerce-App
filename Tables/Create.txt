@@ -1,0 +1,36 @@
+CREATE TABLE m_users (
+	user_id serial PRIMARY KEY,
+	firstname VARCHAR ( 50 ) UNIQUE NOT NULL,
+	lastname VARCHAR ( 50 ) UNIQUE NOT NULL,
+	email VARCHAR ( 255 ) UNIQUE NOT NULL,
+	hash VARCHAR ( 255 ) UNIQUE NOT NULL,
+	salt VARCHAR ( 255 ) UNIQUE NOT NULL,
+	designation VARCHAR(150) NULL,
+	organisation VARCHAR(250) NULL,
+	role VARCHAR(250) NOT NULL,
+	contact_no VARCHAR(12) UNIQUE NOT NULL,
+	identity_proof VARCHAR(250) NULL,
+	identity_card_no VARCHAR(250) NULL,
+	created_on TIMESTAMP NOT NULL
+);
+
+CREATE TABLE m_books (
+	book_id serial PRIMARY KEY,
+	category int NOT NULL,
+  sub_category int NOT NULL,
+  sub_division VARCHAR(4) NOT NULL,
+  call_no VARCHAR(50) NOT NULL,
+  accession_no VARCHAR(50) NOT NULL,
+  isbn VARCHAR(13) NOT NULL,
+  author_name VARCHAR(255) NOT NULL,
+  book_title VARCHAR(500) NOT NULL,
+  publisher VARCHAR(500) NOT NULL,
+  year_publication int NOT NULL,
+  format_type VARCHAR(50) NOT NULL,
+  total_pages int NOT NULL,
+  language VARCHAR(150) NOT NULL,
+  price int NOT NULL,
+  quantity int NOT NULL,
+  status VARCHAR(50) NOT NULL,
+	created_on TIMESTAMP NOT NULL
+);

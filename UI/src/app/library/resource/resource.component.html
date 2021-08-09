@@ -1,0 +1,373 @@
+<div class="dashboard-header-container">
+  <div class="dashboard-wrapper">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 nz-typography class="remove-margin-bottom inner-header-heading">Manage Library</h4>
+      </div>
+      <div class="col-md-6 header-button-top-margin">
+        <button style="float: right;" nz-button type="submit" (click)="open()">New
+          Resource</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' }"
+    [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="visible" nzTitle="Add New Resource" (nzOnClose)="close()">
+    <div>
+      <div class="row">
+        <div class="col-md-12">
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+              <span>
+                Resource Type
+                <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                  nzTheme="outline"></i>
+              </span>
+            </nz-form-label>
+            <nz-form-control>
+              <nz-select [(ngModel)]="selectedResource" name="resource" (ngModelChange)="selectResourceType($event)"
+                nzPlaceHolder="Select Resource Type">
+                <nz-option *ngFor=" let type of resourceType" id="resourceType" [nzValue]="type.resource"
+                  [nzLabel]="type.resource | titlecase">
+                </nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <div *ngIf="bookForm">
+        <form nz-form [formGroup]="addBookForm">
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Book Category
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control [nzErrorTip]="userErrorTpl">
+                  <nz-select formControlName="category" [(ngModel)]="selectedCategory" name="category"
+                    (ngModelChange)="getParticularDccClass($event)" nzPlaceHolder="Select Book Category">
+                    <nz-option *ngFor="let class of dccClassess" [nzValue]="class.class_id"
+                      [nzLabel]="class.class_category">
+                    </nz-option>
+                  </nz-select>
+                  <ng-template #userErrorTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">
+                      Book category is required.
+                    </ng-container>
+                  </ng-template>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Book SubCategory
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <nz-select formControlName="subcategory" [(ngModel)]="selectedSubCategory" name="subcategory"
+                    (ngModelChange)="subClass($event)" nzPlaceHolder="Select Book SubCategory">
+                    <nz-option *ngFor="let subclass of subClassRecord" [nzValue]="subclass.subclass_id"
+                      [nzLabel]="subclass.subclass_category">
+                    </nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Book SubDivision
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <nz-select formControlName="subdivision" [(ngModel)]="selectedSubDivision" name="subdivision"
+                    (ngModelChange)="getSubDivisionCode($event)" nzPlaceHolder="Select Book SubDivision">
+                    <nz-option *ngFor="let division of subDivisionRecord" [nzValue]="division.sub_division_unit"
+                      [nzLabel]="division.sub_division_category">
+                    </nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Accession no.
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <input formControlName="accessionno" nz-input placeholder="Accession no" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    ISBN no.
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                    <input formControlName="isbn" nz-input placeholder="ISBN no." [(ngModel)]="isbn" name="isbn" />
+                  </nz-input-group>
+                  <ng-template #suffixIconButton>
+                    <button (click)="getBookByISBN()" nz-button nzType="primary" nzSearch><i nz-icon
+                        nzType="search"></i></button>
+                  </ng-template>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Author Name
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <input formControlName="authorname" [(ngModel)]="bookAuthorName" nz-input placeholder="Author Name"
+                    (focusout)="getBookAuthor()" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+
+
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    DCC call no.
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <input formControlName="callno" nz-input placeholder="DDC call no." [(ngModel)]="call_number"
+                    [value]="call_number" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Book Title
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <input formControlName="booktitle" [(ngModel)]="bookTitle" nz-input placeholder="Book Title" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Publisher
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <input formControlName="publisher" [(ngModel)]="bookPublisher" nz-input placeholder="Publisher" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Year Publication
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <input formControlName="yearpublication" [(ngModel)]="bookpublishYear" nz-input
+                    placeholder="Publisher" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Format Type
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <input formControlName="formattype" [(ngModel)]="bookFormatType" nz-input placeholder="Format Type" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Total Pages
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <input formControlName="totalpages" [(ngModel)]="bookPage" nz-input placeholder="Pages" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Language
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <input formControlName="language" nz-input placeholder="Language" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Price
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <input formControlName="price" nz-input placeholder="Price" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Quantity
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <input formControlName="quantity" nz-input placeholder="Qunatity" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Status
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <input formControlName="status" nz-input placeholder="Status" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="resourceType">
+                  <span>
+                    Upload Book Image
+                    <i nz-icon nz-tooltip nzTooltipTitle="Select Resource Type" nzType="question-circle"
+                      nzTheme="outline"></i>
+                  </span>
+                </nz-form-label>
+                <nz-form-control>
+                  <nz-upload [(nzFileList)]="fileList" [nzName]="upload" [nzBeforeUpload]="beforeUpload">
+                    <button nz-button><i nz-icon nzType="upload"></i>Select File</button>
+                  </nz-upload>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+
+              <button nz-button style="float: right; margin-left: 8px;" (click)="resetForm($event)">Reset</button>
+              <button nz-button style="float: right;" nzType="primary" (click)="handleUpload()">Save Data</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="mediaForm">
+        media
+      </div>
+      <div *ngIf="magazineForm">
+        magazine
+      </div>
+    </div>
+  </nz-drawer>
+</div>
+<div>
+  <div class="container-background">
+    <app-view-books [bookRecords]="updateBookRecord"></app-view-books>
+  </div>
+</div>

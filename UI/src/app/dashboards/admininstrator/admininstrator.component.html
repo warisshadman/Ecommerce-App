@@ -1,0 +1,35 @@
+<div nz-row class="dashboard-row">
+  <div nz-col nzFlex="50px">
+    <div class="dashboard-logo-container">
+
+    </div>
+    <div class="dashboard-sidebar-menu">
+      <div class="menu-button-container">
+        <div class="menu-button" nz-button nz-popover nzPopoverTitle="Manage Library"
+          [nzPopoverContent]="contentTemplate" nzPopoverPlacement="rightTop">
+          <div>
+            <i nz-icon style="color: #fff; font-size: 25px;" nzType="book" nzTheme="outline"></i>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzFlex="auto">
+
+    <div class="main-content-container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<ng-template #contentTemplate>
+  <div>
+    <a routerLink="/administrator/resource">
+      <p class="sub-menu">Resource</p>
+    </a>
+    <p class="sub-menu">Shelf</p>
+    <p class="sub-menu">Rack</p>
+    <p class="sub-menu" style="margin-bottom: 0px !important;">View Books</p>
+  </div>
+</ng-template>
